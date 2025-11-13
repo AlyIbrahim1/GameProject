@@ -23,6 +23,15 @@ WARNING: Do not get too carried away. If you're shape takes more than 15 lines o
 
 */
 
+
+/*
+Ideas: 
+- Have a day and night cycle with blinking stars
+- Draw a palm tree
+- integrate key of life in something
+*/  
+
+
 function setup()
 {
 	createCanvas(1024, 576);
