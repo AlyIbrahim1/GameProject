@@ -111,7 +111,7 @@ function draw()
 	}
 	//start point: (850)
 
-	tree(850);
+	// tree(850);
 	//change tree into palm tree
 	
 	
