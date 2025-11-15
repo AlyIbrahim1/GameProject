@@ -31,6 +31,7 @@ Ideas:
 - integrate key of life in something
 */  
 
+let stars = [];
 
 function setup()
 {
@@ -43,16 +44,50 @@ function draw()
 	timeOfDay = (timeOfDay + 1) % 1000; 
 	// increment timeOfDay variable each frame (Each day cycle is 1000 frames)
 
-	
-	background(100, 155, 255); //fill the sky blue
 
+	// background(100, 155, 255); //fill the sky blue
+
+	const time = sin(timeOfDay * 0.00314) //Sine wave for time between -1 and 1
+	const r = map(time, -1, 1, 100, 0);
+	const g = map(time, -1, 1, 155, 0);
+	const b = map(time, -1, 1, 255, 40);
+	background(r, g, b);
+
+	
 	noStroke();
 	fill(223, 191, 145);
-	rect(0, 432, 1024, 144); //draw some green ground
+	rect(0, 432, 1024, 144); //Desert ground
 	fill(208, 176,130);
 	rect(0,432, 1024, 40); //slightly darker background
-
+	
 	//change into sand ground
+	
+	//random stars at night
+	function generateStars() {
+		for (let i = 0; i < 200; i++) {
+			stars.push({
+				x: random(0, 1024),
+				y: random(0, 432),
+				size: random(1, 3),
+				brightness: random(150, 255)
+			});
+		}
+	}
+
+	function drawStars() {
+		for (let star of stars) {
+			fill(star.brightness);
+			noStroke();
+			ellipse(star.x, star.y, star.size, star.size)
+		}
+	}
+
+	if (time > 0) {
+		if (stars.length === 0) {
+			generateStars();
+		}
+		drawStars();
+	}
 
 	//1. a cloud in the sky
 	//cloud shape 1
