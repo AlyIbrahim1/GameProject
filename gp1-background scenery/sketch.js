@@ -1,37 +1,11 @@
 /*
-
-The Game Project
-
-1 - Background Scenery
-
-Use p5 drawing functions such as rect, ellipse, line, triangle and
-point to draw the scenery as set out in the code comments. The items
-should appear next to the text titles.
-
-Each bit of scenery is worth two marks:
-
-0 marks = not a reasonable attempt
-1 mark = attempted but it's messy or lacks detail
-2 marks = you've used several shape functions to create the scenery
-
-I've given titles and chosen some base colours, but feel free to
-imaginatively modify these and interpret the scenery titles loosely to
-match your game theme.
-
-WARNING: Do not get too carried away. If you're shape takes more than 15 lines of code to draw then you've probably over done it.
-
-
-*/
-
-
-/*
 Ideas: 
 - Have a day and night cycle with blinking stars
 - Draw a palm tree
 - integrate key of life in something
 */  
 
-let stars = [];
+let stars = []; //Stores each star position, size and brightness 
 
 function setup()
 {
@@ -42,27 +16,23 @@ function setup()
 function draw()
 {
 	timeOfDay = (timeOfDay + 1) % 1000; 
-	// increment timeOfDay variable each frame (Each day cycle is 1000 frames)
+	// increment timeOfDay variable each frame (Each day cycle is 1000 frames, day 500, night 500)
 
 
-	// background(100, 155, 255); //fill the sky blue
-
+	//background that changes between day (time < 0) and night(time > 0)
 	const time = sin(timeOfDay * 0.00314) //Sine wave for time between -1 and 1
 	const r = map(time, -1, 1, 100, 0);
 	const g = map(time, -1, 1, 155, 0);
 	const b = map(time, -1, 1, 255, 40);
 	background(r, g, b);
 
-	
 	noStroke();
 	fill(223, 191, 145);
 	rect(0, 432, 1024, 144); //Desert ground
 	fill(208, 176,130);
 	rect(0,432, 1024, 40); //slightly darker background
 	
-	//change into sand ground
-	
-	//random stars at night
+	//generates 200 stars with random possitions, size and brighness
 	function generateStars() {
 		for (let i = 0; i < 200; i++) {
 			stars.push({
@@ -74,6 +44,7 @@ function draw()
 		}
 	}
 
+	//draws each star from the array stars[]
 	function drawStars() {
 		for (let star of stars) {
 			fill(star.brightness);
@@ -89,7 +60,6 @@ function draw()
 		drawStars();
 	}
 
-	//1. a cloud in the sky
 	//cloud shape 1
 	function cloud1(x, y) {
 		fill(255);
@@ -119,12 +89,7 @@ function draw()
 	cloud2(410, 90);
 	//midpoint: (410, 90)
 
-
-	noStroke();
-	fill(255);
-	text("cloud", 200, 100);
-
-	//2. a mountain in the distance
+	//Pyramids in the background
 	fill(188, 146, 97);
 	triangle(594, 432, 757, 280, 920, 432);
 	fill(138, 107, 71);
@@ -139,14 +104,8 @@ function draw()
 	triangle(178.6, 432, 105, 432, 268, 200); //pyramid 1 shadow
 
 	//missing white cap with golden stroke
-
-	noStroke();
-	fill(255);
-	text("mountain", 500, 256);
-
 	
 	function tree(x) {
-		//3. a tree
 		fill(100, 64, 11);
 		rect(x - 20, 432, 40, -150);
 		//leaves
@@ -162,14 +121,8 @@ function draw()
 
 	// tree(850);
 	//change tree into palm tree
-	
-	
-	noStroke();
-	fill(255);
-	text("tree", 800, 346);
 
-	//4. a canyon
-	//NB. the canyon should go from ground-level to the bottom of the screen
+	//Canyon
 	function canyon(x) {
 		fill(59, 51, 35);
 		triangle(x + 37.5, 472, x + 75, 616, x + 112.5, 472);
@@ -180,12 +133,7 @@ function draw()
 	//start point: (145)
 	canyon(145);
 
-
-	noStroke();
-	fill(255);
-	text("canyon", 100, 480);
-
-	//5. a collectable token - eg. a jewel, fruit, coins
+	//Collectable item (Ruby / Diamond)
 	function ruby(x, y) {
 		strokeWeight(1);
 		stroke(120, 0, 23);
@@ -203,12 +151,7 @@ function draw()
 		triangle(x + 10, y + 5, x + 20, y - 5, x, y + 25);
 	}
 	//midpoint: (460,445)
-
 	ruby(460,445);
-	
-	noStroke();
-	fill(255);
-	text("collectable item", 400, 400);
 
 	//A helpful mouse pointer
 	push();
