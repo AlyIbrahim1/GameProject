@@ -35,10 +35,15 @@ Ideas:
 function setup()
 {
 	createCanvas(1024, 576);
+	timeOfDay = 0;
 }
 
 function draw()
 {
+	timeOfDay = (timeOfDay + 1) % 1000; 
+	// increment timeOfDay variable each frame (Each day cycle is 1000 frames)
+
+	
 	background(100, 155, 255); //fill the sky blue
 
 	noStroke();
